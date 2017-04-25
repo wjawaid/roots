@@ -1,8 +1,9 @@
-##' .. content for \description{} (no empty lines) ..
+##' Animation plot
 ##'
-##' .. content for \details{} ..
-##' @title
-##' ##' @param data Reduced dimensionality map to be used for visualisation
+##' Animation plot
+##' Generates plot in base R that gradually updates giving the impression of an animation
+##' @title Animation plot
+##' @param data Dimensionality reduction plot
 ##' @param ccm Dataframe of indices and momentums
 ##' @param delay Delay between frames in seconds
 ##' @param darken Passed to colGrad() function
@@ -10,8 +11,10 @@
 ##' @param c.cex Size of poiints.
 ##' @param main Title
 ##' @param ... Passed to plot() function
-##' @return 
+##' @return Generates plot
 ##' @author Wajid Jawaid
+##' @importFrom graphics plot points lines
+##' @export
 animPlot <- function(data, ccm, delay = 1e-1, darken = 1, lwd = 1, c.cex = 1, main = "", ...) {
     plot(data, pch = 16, col = "gray", main = main, ...)
     ccm <- ccm[ccm[,1]!=0,]
@@ -48,9 +51,9 @@ animPlot <- function(data, ccm, delay = 1e-1, darken = 1, lwd = 1, c.cex = 1, ma
     }
 }
 
-##' Generates a GIF animating 
+##' Generates a GIF animation 
 ##'
-##' Generates a GIF animating 
+##' Generates a GIF animation
 ##' @title Generates a GIF animating 
 ##' @param data Reduced dimensionality map to be used for visualisation
 ##' @param ccm Dataframe of indices and momentums
@@ -63,11 +66,14 @@ animPlot <- function(data, ccm, delay = 1e-1, darken = 1, lwd = 1, c.cex = 1, ma
 ##' @param img.name Name of temporary image files generated
 ##' @param plot.par Passed to R base par() function
 ##' @param point.col Colour of background points
+##' @param arrowLength Modify length of arrow
 ##' @param ... Passed to plot() function
 ##' @return Produces an animated GIF with given file name
 ##' @author Wajid Jawaid
-##' @importFrom animation saveGIF
-animPlotGif <- function(data, ccm, delay = 1e-1, darken =1 , lwd =1, c.cex = 1, main = "", gif = "animation", img.name = "tempPlot", plot.par = NULL, point.col = "#333333",...) {
+##' @importFrom animation saveGIF ani.options
+##' @importFrom graphics segments arrows par
+##' @export
+animPlotGif <- function(data, ccm, delay = 1e-1, darken =1 , lwd =1, c.cex = 1, main = "", gif = "animation", img.name = "tempPlot", plot.par = NULL, point.col = "#333333", arrowLength = 0.1, ...) {
     ccm <- ccm[ccm[,1]!=0,]
     cc <- ccm[,1]
     ncols <- colGrad(length(cc), darken = darken)
@@ -83,6 +89,7 @@ animPlotGif <- function(data, ccm, delay = 1e-1, darken =1 , lwd =1, c.cex = 1, 
     xm <- mean(xp)
     ym <- mean(yp)
     ani.options(autobrowse = FALSE, verbose = FALSE)
+    ani.options(interval = delay)
     saveGIF(
         for (i in 1:length(cc)) {
             if (!is.null(plot.par)) par(plot.par)
@@ -95,7 +102,7 @@ animPlotGif <- function(data, ccm, delay = 1e-1, darken =1 , lwd =1, c.cex = 1, 
             ## theta <- atan2(ccm[i,3], ccm[i,2])
             vec <- ccm[i, 2:3]
             ## vec[2] <- vec[2] / y2x
-            vec <- unitLength(vec) / 10
+            vec <- arrowLength * unitLength(vec)
             if (any(vec!=0)) {
                 arrows(x0 = xm, y0 = ym, x1 = xm + vec[1], y1 = ym + vec[2], col = "white",
                        lwd = 2)

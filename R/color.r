@@ -7,6 +7,8 @@
 ##' @param darken Multiplication factor. Must be less than 1. Smaller the darker.
 ##' @return Returns vector of RGB colours
 ##' @author Wajid Jawaid
+##' @importFrom grDevices rgb
+##' @export
 colGrad <- function(x, darken = 1) {
     clts <- data.frame(R = c(255, 255, 0,   0,   0,   255),
                        G = c(0,   255, 255, 255, 0,   0),

@@ -43,13 +43,15 @@
 ##' This \eqn{R} without the first eigen vector is returned as the diffusion map.
 ##' @title Generic diffusion function
 ##' @param data Matrix of data with genes in rows and cells in columns.
+##' @param ndims Number of dimensions to return
 ##' @param nsig For automatic sigma calculation
+##' @param removeFirst Default TRUE. Removes the first eigenvector
+##' @param useARPACK Default TRUE. Uses Arnoldi algorithm for eignvector calculations
 ##' @param distfun A different distance function that returns the \strong{squared}
 ##' distance
 ##' @param sigmas Manually provide sigma
 ##' @param sqdistmat \strong{Squared} distance matrix.
 ##' Give your own squared distance matrix.
-##' @inheritParams diffuse
 ##' @return List output containing:
 ##' \tabular{rl}{%
 ##'   \emph{values} \tab Eigenvalues, excluding the first eigenvalue, which should%
@@ -74,6 +76,7 @@
 ##'                                 \code{markov}.\cr
 ##' }
 ##' @author Wajid Jawaid
+##' @importFrom rARPACK eigs
 ##' @export
 diffuseMat2 <- function(data, ndims = 20, nsig = 5,
                         removeFirst = TRUE, useARPACK = TRUE,
@@ -186,6 +189,21 @@ diffuseProj <- function(dm, x, data, distfun) {
     predMat[,-1, drop=FALSE]
 }
 
+##' Calculates sigmas for a distance matrix
+##'
+##' Calculates sigmas for a distance matrix
+##' Using Laleh Hagherverdi's method
+##' @title Calculates sigmas for a distance matrix
+##' @param d Square distance matrix with 0 diagonal
+##' @param knn Number of nearest neighbours to use for calculation
+##' @return Returns a vector of sigmas
+##' @author wj241
+calculateVariableSigmas <- function(d, knn) {
+    if (nrow(d) != ncol(d)) stop("Distance matrix not square.")
+    if (all(diag(d) != 0)) stop("Self loops present")
+    return(apply(d, 1, function(x) sqrt(sort(x)[knn])/2))
+}
+
 ##' Apply Gaussian Kernel using Laleh Haghverdi's variable sigma
 ##'
 ##' Apply Gaussian Kernel using Laleh Haghverdi's variable sigma
@@ -211,4 +229,43 @@ applyGaussianKernelwithVariableSigma <- function(d2, rsigmas, csigmas = NULL) {
         sigmaSum <- matrix(sigmaSum, length(rsigmaSqd))
     }
     W <- sqrt(2*sigmaMat / sigmaSum) * exp(-d2 / sigmaSum)
+}
+
+##' Fast vectorised Euclidean distance calculator
+##'
+##' Calculates Euclidean distances between vectors arranged as columns in a matrix.
+##' @title Fast vectorised Euclidean distance calculator
+##' @return Returns a matrix of pairwise distances
+##' @author Wajid Jawaid
+##' @param x Matrix with vectors in columns.
+##' @param squared Will not perform the square root, i.e. will return the squared `L2-norm'.
+##' @export
+fastDist <- function(x, squared = FALSE) {
+    a <- colSums(x^2)
+    a <- a * matrix(1, ncol(x), ncol(x))
+    a <- a + t(a)
+    ab <- t(x) %*% x
+    d <- a - 2 * ab
+    diag(d) <- 0
+    if (!squared) d <- sqrt(d)
+    return(d)
+}
+
+##' Make markov matrix sparse
+##'
+##' Make markov matrix sparse
+##' Choose knn as the maximum number of similar cells are likely to exist in your dataset.
+##' @title Make markov matrix sparse
+##' @param mkv Markov matric
+##' @param knn Number of nearest neighbours. See above.
+##' @return Markovian sparse matrix.
+##' @author Wajid Jawaid
+sparseMarkov <- function(mkv, knn) {
+    predicateFilter <- mkv <= (1/knn)
+    mkv[predicateFilter] <- 0
+    rSums <- rowSums(mkv) == 0
+    if (any(rSums)) {
+        cat(sum(rSums), " cells have no transitions. Try increasing knn.\n")
+    }
+    mkv <- mkv / rowSums(mkv)
 }
