@@ -84,7 +84,6 @@
 ##'
 ##' Angerer, P., Haghverdi, L., Büttner, M., Theis, F.J., Marr, C., Buettner, F., 2016. destiny: diffusion maps for large-scale single-cell data in R. Bioinformatics 32, 1241–1243.
 ##' @export
-##' @export
 diffuseMat2 <- function(data, ndims = 20, nsig = 5,
                         removeFirst = TRUE, useARPACK = TRUE,
                         distfun = NULL, sigmas = NULL, sqdistmat = NULL) {
