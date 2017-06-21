@@ -77,6 +77,13 @@
 ##' }
 ##' @author Wajid Jawaid
 ##' @importFrom rARPACK eigs
+##' @references
+##' Haghverdi, L., Buettner, F., Theis, F.J., 2015. Diffusion maps for high-dimensional single-cell analysis of differentiation data. Bioinformatics 31, 2989–2998.
+##'
+##' Haghverdi, L., Büttner, M., Wolf, F.A., Buettner, F., Theis, F.J., 2016. Diffusion pseudotime robustly reconstructs lineage branching. Nat Meth 13, 845–848.
+##'
+##' Angerer, P., Haghverdi, L., Büttner, M., Theis, F.J., Marr, C., Buettner, F., 2016. destiny: diffusion maps for large-scale single-cell data in R. Bioinformatics 32, 1241–1243.
+##' @export
 ##' @export
 diffuseMat2 <- function(data, ndims = 20, nsig = 5,
                         removeFirst = TRUE, useARPACK = TRUE,
@@ -229,43 +236,4 @@ applyGaussianKernelwithVariableSigma <- function(d2, rsigmas, csigmas = NULL) {
         sigmaSum <- matrix(sigmaSum, length(rsigmaSqd))
     }
     W <- sqrt(2*sigmaMat / sigmaSum) * exp(-d2 / sigmaSum)
-}
-
-##' Fast vectorised Euclidean distance calculator
-##'
-##' Calculates Euclidean distances between vectors arranged as columns in a matrix.
-##' @title Fast vectorised Euclidean distance calculator
-##' @return Returns a matrix of pairwise distances
-##' @author Wajid Jawaid
-##' @param x Matrix with vectors in columns.
-##' @param squared Will not perform the square root, i.e. will return the squared `L2-norm'.
-##' @export
-fastDist <- function(x, squared = FALSE) {
-    a <- colSums(x^2)
-    a <- a * matrix(1, ncol(x), ncol(x))
-    a <- a + t(a)
-    ab <- t(x) %*% x
-    d <- a - 2 * ab
-    diag(d) <- 0
-    if (!squared) d <- sqrt(d)
-    return(d)
-}
-
-##' Make markov matrix sparse
-##'
-##' Make markov matrix sparse
-##' Choose knn as the maximum number of similar cells are likely to exist in your dataset.
-##' @title Make markov matrix sparse
-##' @param mkv Markov matric
-##' @param knn Number of nearest neighbours. See above.
-##' @return Markovian sparse matrix.
-##' @author Wajid Jawaid
-sparseMarkov <- function(mkv, knn) {
-    predicateFilter <- mkv <= (1/knn)
-    mkv[predicateFilter] <- 0
-    rSums <- rowSums(mkv) == 0
-    if (any(rSums)) {
-        cat(sum(rSums), " cells have no transitions. Try increasing knn.\n")
-    }
-    mkv <- mkv / rowSums(mkv)
 }
