@@ -1,36 +1,45 @@
-Reconstructing Ordered Ontogenic Trajectories
-================
-Wajid Jawaid
-2017-07-09
+---
+title: "Reconstructing Ordered Ontogenic Trajectories"
+author: "Wajid Jawaid"
+date: "`r Sys.Date()`"
+output: github_document
+vignette: >
+  %\VignetteIndexEntry{Infer biologically plausible journeys through single cell data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
 
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
 Reconstructing ordered ontogenic trajectories provides methods for:
 
-1.  Identifying informative genes (crude),
-2.  Finding a sparse graph structure between closely related cells by removing spurious edges and
-3.  Traversing the graph in a biologiclal informed way using a Directed Non-markovian Monte-Carlo method.
+1. Identifying informative genes (crude),
+2. Finding a sparse graph structure between closely related cells by removing spurious edges and
+3. Traversing the graph in a biologiclal informed way using a Directed Non-markovian Monte-Carlo method.
 
 The main goal of *roots* is to infer plausible developmental journeys guided by the user.
 
-Installation
-------------
+## Installation
 
-``` {.r}
+```{r installation, echo=TRUE, eval=FALSE}
 library(devtools)
 install_github("wjawaid/roots")
-```
+``` 
 
-Example
--------
+## Example
 
 Here I take the mouse adult haematopoietic data from [Nestorowa et al.](http://www.bloodjournal.org/content/early/2016/06/30/blood-2016-05-716480). Data is downloaded and processed using the **goggles()** function as below.
 
-``` {.r}
+```{r example, echo=TRUE, eval=FALSE}
 library(roots)
 
 ## Load data
@@ -63,6 +72,8 @@ xx <- goggles(blood)
 ## Plot
 plot(xx$l, pch=16, col = nmeta[rownames(xx$l), "col"])
 legend("topright", legend = leg$cell[legOrd], fill=leg$col[legOrd], inset=0.02)
+
 ```
 
 ![Output from goggle() function](./vignettes/example.png)
+
