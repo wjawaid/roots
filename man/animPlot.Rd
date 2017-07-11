@@ -20,7 +20,7 @@ animPlot(data, ccm, delay = 0.1, darken = 1, lwd = 1, c.cex = 1,
 
 \item{c.cex}{Size of poiints.}
 
-\item{main}{Title}
+\item{main}{Plot title}
 
 \item{...}{Passed to plot() function}
 }
@@ -33,6 +33,11 @@ Animation plot
 \details{
 Animation plot
 Generates plot in base R that gradually updates giving the impression of an animation
+}
+\examples{
+\dontrun{
+xx <- animPlot(x, ccm)
+}
 }
 \author{
 Wajid Jawaid

@@ -19,6 +19,10 @@ unitLength <- function(x) {
 ##' @param w1 Parameter - Base used for modifying of tm probs.
 ##' @param w2 Parameter - Multiplifaction factor used for modifying tm probs.
 ##' @param varEst Number of alternatives to sample for estimating variance.
+##' @examples
+##' \dontrun{
+##' nextCell <- fnc(rdmap, tm, curInd)
+##' }
 ##' @return Returns index of new cell and new momentum vector
 ##' @author Wajid Jawaid
 ##' @export
@@ -112,6 +116,10 @@ fnc <- function(rdmap, tm, curInd, mom = NULL, momAdj = 0.5, w1 = exp(1), w2 = 1
 ##' @param simLen Maximum number of allowable tranisitons
 ##' @param sim.seed Random seed for reproducibility
 ##' @return Returns a data.frame of ordered indices and momentums
+##' @examples
+##' \dontrun{
+##' traj <- getTraj(rdmap, tm, startCells, terminalCells)
+##' }
 ##' @inheritParams fnc
 ##' @author Wajid Jawaid
 ##' @export

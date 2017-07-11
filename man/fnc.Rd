@@ -36,6 +36,11 @@ Find next cell function. Transitioin probabilities are modifed by calulating the
 of the angle between the current momentum vector and the vector on the rdmap required for
 each transtion. The tranisiton probability is adjusted by multiplying by w1^(w2 * (cosine_angle)) and then normalising.
 }
+\examples{
+\dontrun{
+nextCell <- fnc(rdmap, tm, curInd)
+}
+}
 \author{
 Wajid Jawaid
 }

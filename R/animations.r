@@ -9,9 +9,13 @@
 ##' @param darken Passed to colGrad() function
 ##' @param lwd Line width
 ##' @param c.cex Size of poiints.
-##' @param main Title
+##' @param main Plot title
 ##' @param ... Passed to plot() function
 ##' @return Generates plot
+##' @examples
+##' \dontrun{
+##' xx <- animPlot(x, ccm)
+##' }
 ##' @author Wajid Jawaid
 ##' @importFrom graphics plot points lines
 ##' @export
@@ -69,6 +73,10 @@ animPlot <- function(data, ccm, delay = 1e-1, darken = 1, lwd = 1, c.cex = 1, ma
 ##' @param arrowLength Modify length of arrow
 ##' @param ... Passed to plot() function
 ##' @return Produces an animated GIF with given file name
+##' @examples
+##' \dontrun{
+##' xx <- animPlotGif(x, ccm, gif = "animation")
+##' }
 ##' @author Wajid Jawaid
 ##' @importFrom animation saveGIF ani.options
 ##' @importFrom graphics segments arrows par

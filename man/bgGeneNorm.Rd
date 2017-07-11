@@ -25,6 +25,11 @@ Find background genes that are expressed at a lower percentage of
 the total library size per cell than 'threshold' parameter. These
 genes are used to calculate a normalisation factor.
 }
+\examples{
+\dontrun{
+normGenes <- bgGeneNorm(x)
+}
+}
 \author{
 Wajid Jawaid
 }

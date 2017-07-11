@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/roots)](https://cran.r-project.org/package=roots)
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
 Reconstructing ordered ontogenic trajectories provides methods for:
@@ -29,8 +30,15 @@ Reconstructing ordered ontogenic trajectories provides methods for:
 The main goal of *roots* is to infer plausible developmental journeys guided by the user.
 
 ## Installation
+Can be installed through CRAN or GitHub
 
-```{r installation, echo=TRUE, eval=FALSE}
+### CRAN
+```{r installation_CRAN, echo=TRUE, eval=FALSE}
+install.packages("roots")
+```
+
+### Bleeding edge
+```{r installation_GitHub, echo=TRUE, eval=FALSE}
 library(devtools)
 install_github("wjawaid/roots")
 ``` 

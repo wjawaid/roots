@@ -9,6 +9,10 @@
 ##' genes in columns
 ##' @param threshold Default 0.05. The threshold below which a gene is
 ##' deemed background
+##' @examples
+##' \dontrun{
+##' normGenes <- bgGeneNorm(x)
+##' }
 ##' @return Returns a normalised matrix of same dimenions as 'x'
 ##' @author Wajid Jawaid
 bgGeneNorm <- function(x, threshold = 0.05) {
@@ -31,6 +35,10 @@ bgGeneNorm <- function(x, threshold = 0.05) {
 ##' @param fano Default TRUE. Predicate treat CV as Fano factor or CV
 ##' @return Returns a filtered matrix with same number of cells but fewer
 ##' genes than 'x'
+##' @examples
+##' \dontrun{
+##' expressionGenesFiltered <- filterGenes(x)
+##' }
 ##' @author Wajid Jawaid
 ##' @inheritParams bgGeneNorm
 ##' @importFrom stats sd var

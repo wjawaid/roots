@@ -28,6 +28,11 @@ Predicts diffusion map projection from new data points
 \details{
 Predicts diffusion map projection from new data points
 }
+\examples{
+\dontrun{
+y <- diffuseProj(xx, newData, oldData, function(z) (1-cor(z))^2)
+}
+}
 \author{
 Wajid Jawaid
 }

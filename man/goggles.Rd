@@ -38,6 +38,12 @@ View single cell dataset
 \details{
 View single cell dataset
 }
+\examples{
+\dontrun{
+xx <- goggles(x)
+plot(xx$l)
+}
+}
 \author{
 Wajid Jawaid
 }

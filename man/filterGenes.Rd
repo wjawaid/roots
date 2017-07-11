@@ -28,6 +28,11 @@ Filter genes
 Filter genes by mean and either coefficient of variation, cv or
 Fano factor.
 }
+\examples{
+\dontrun{
+expressionGenesFiltered <- filterGenes(x)
+}
+}
 \author{
 Wajid Jawaid
 }

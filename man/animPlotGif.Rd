@@ -44,6 +44,11 @@ Generates a GIF animation
 \details{
 Generates a GIF animation
 }
+\examples{
+\dontrun{
+xx <- animPlotGif(x, ccm, gif = "animation")
+}
+}
 \author{
 Wajid Jawaid
 }

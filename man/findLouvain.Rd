@@ -18,6 +18,12 @@ Louvain clustering on transition matrix
 \details{
 Louvain clustering on transition matrix
 }
+\examples{
+\dontrun{
+xx <- findLouvain(mkv)
+xx$cll
+}
+}
 \author{
 Wajid Jawaid
 }

@@ -1,5 +1,5 @@
 Package: roots
-Title: Reconstructing ordered ontogenic trajectories
+Title: Reconstructing Ordered Ontogenic Trajectories
 Version: 1.0
 Authors@R: person("Wajid", "Jawaid", email = "wj241@cam.ac.uk", role = c("aut", "cre"))
 Description: A set of tools to reconstruct ordered ontogenic trajectories from

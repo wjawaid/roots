@@ -16,6 +16,11 @@
 ##' dmat, distance matrix;
 ##' pca, PCA reduced matrix.
 ##' sparse, diagnostics on adj prior to applying sparseMarkov().
+##' @examples
+##' \dontrun{
+##' xx <- goggles(x)
+##' plot(xx$l)
+##' }
 ##' @author Wajid Jawaid
 ##' @importFrom igraph layout_with_fr layout_with_drl
 ##' @importFrom stats dist prcomp

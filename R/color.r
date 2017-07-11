@@ -6,6 +6,8 @@
 ##' @param x Number of colours required
 ##' @param darken Multiplication factor. Must be less than 1. Smaller the darker.
 ##' @return Returns vector of RGB colours
+##' @examples
+##' gradientColors <- colGrad(10)
 ##' @author Wajid Jawaid
 ##' @importFrom grDevices rgb
 ##' @export

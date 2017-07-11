@@ -4,6 +4,11 @@
 ##' @title Louvain clustering on transition matrix
 ##' @param mkv Transition matrix
 ##' @return Returns a list with graph, dataframe and community object
+##' @examples
+##' \dontrun{
+##' xx <- findLouvain(mkv)
+##' xx$cll
+##' }
 ##' @author Wajid Jawaid
 ##' @export
 ##' @importFrom igraph cluster_louvain communities graph.adjacency

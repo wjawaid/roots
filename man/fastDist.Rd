@@ -20,6 +20,11 @@ Fast vectorised Euclidean distance calculator
 \details{
 Calculates Euclidean distances between vectors arranged as columns in a matrix.
 }
+\examples{
+\dontrun{
+dist <- fastDist(x)
+}
+}
 \author{
 Wajid Jawaid
 }

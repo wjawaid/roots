@@ -22,6 +22,11 @@ Apply Gaussian Kernel using Laleh Haghverdi's variable sigma
 \details{
 Apply Gaussian Kernel using Laleh Haghverdi's variable sigma
 }
+\examples{
+\dontrun{
+d <- applyGaussianKernelwithVariableSigma(dist, sigmas)
+}
+}
 \author{
 Wajid Jawaid
 }

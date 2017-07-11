@@ -21,6 +21,11 @@ Calculates sigmas for a distance matrix
 Calculates sigmas for a distance matrix
 Using Laleh Hagherverdi's method
 }
+\examples{
+\dontrun{
+sigmas <- calculateVariableSigmas(dist, 5)
+}
+}
 \author{
 wj241
 }

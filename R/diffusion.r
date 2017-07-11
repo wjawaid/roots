@@ -75,6 +75,10 @@
 ##'    \emph{densityCorrected} \tab Matrix after applying density correction to %
 ##'                                 \code{markov}.\cr
 ##' }
+##' @examples
+##' \dontrun{
+##' xx <- diffuseMat(x)
+##' }
 ##' @author Wajid Jawaid
 ##' @importFrom rARPACK eigs
 ##' @references
@@ -84,7 +88,7 @@
 ##'
 ##' Angerer, P., Haghverdi, L., Büttner, M., Theis, F.J., Marr, C., Buettner, F., 2016. destiny: diffusion maps for large-scale single-cell data in R. Bioinformatics 32, 1241–1243.
 ##' @export
-diffuseMat2 <- function(data, ndims = 20, nsig = 5,
+diffuseMat <- function(data, ndims = 20, nsig = 5,
                         removeFirst = TRUE, useARPACK = TRUE,
                         distfun = NULL, sigmas = NULL, sqdistmat = NULL) {
     if (!is.null(sqdistmat)) {
@@ -169,6 +173,10 @@ diffuseMat2 <- function(data, ndims = 20, nsig = 5,
 ##' distance measure, with each sample in the rows and distance to
 ##' previous data points in columns, e.g. function(x, y) (1 - cor(x, y))^2.
 ##' @return Returns a matrix with projected diffusion components.
+##' @examples
+##' \dontrun{
+##' y <- diffuseProj(xx, newData, oldData, function(z) (1-cor(z))^2)
+##' }
 ##' @author Wajid Jawaid
 ##' @export
 diffuseProj <- function(dm, x, data, distfun) {
@@ -202,6 +210,10 @@ diffuseProj <- function(dm, x, data, distfun) {
 ##' @title Calculates sigmas for a distance matrix
 ##' @param d Square distance matrix with 0 diagonal
 ##' @param knn Number of nearest neighbours to use for calculation
+##' @examples
+##' \dontrun{
+##' sigmas <- calculateVariableSigmas(dist, 5)
+##' }
 ##' @return Returns a vector of sigmas
 ##' @author wj241
 calculateVariableSigmas <- function(d, knn) {
@@ -218,6 +230,10 @@ calculateVariableSigmas <- function(d, knn) {
 ##' @param rsigmas Sigmas for cells in the rows
 ##' @param csigmas Sigmas for cells in the columns
 ##' @return Returns matrix of same size as d2.
+##' @examples
+##' \dontrun{
+##' d <- applyGaussianKernelwithVariableSigma(dist, sigmas)
+##' }
 ##' @author Wajid Jawaid
 applyGaussianKernelwithVariableSigma <- function(d2, rsigmas, csigmas = NULL) {
     if (is.null(csigmas)) {

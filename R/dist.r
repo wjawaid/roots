@@ -2,10 +2,14 @@
 ##'
 ##' Calculates Euclidean distances between vectors arranged as columns in a matrix.
 ##' @title Fast vectorised Euclidean distance calculator
-##' @return Returns a matrix of pairwise distances
-##' @author Wajid Jawaid
 ##' @param x Matrix with vectors in columns.
 ##' @param squared Will not perform the square root, i.e. will return the squared `L2-norm'.
+##' @examples
+##' \dontrun{
+##' dist <- fastDist(x)
+##' }
+##' @return Returns a matrix of pairwise distances
+##' @author Wajid Jawaid
 ##' @export
 fastDist <- function(x, squared = FALSE) {
     a <- colSums(x^2)

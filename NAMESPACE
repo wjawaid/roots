@@ -3,7 +3,7 @@
 export(animPlot)
 export(animPlotGif)
 export(colGrad)
-export(diffuseMat2)
+export(diffuseMat)
 export(diffuseProj)
 export(fastDist)
 export(findLouvain)

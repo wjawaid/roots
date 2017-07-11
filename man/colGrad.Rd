@@ -21,6 +21,9 @@ Generates a smooth colour gradient
 Generates a smooth colour gradient
 Goes from red to red/green to green to green/blue to blue to blu/red
 }
+\examples{
+gradientColors <- colGrad(10)
+}
 \author{
 Wajid Jawaid
 }

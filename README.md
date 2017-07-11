@@ -1,13 +1,13 @@
 Reconstructing Ordered Ontogenic Trajectories
 ================
 Wajid Jawaid
-2017-07-09
+2017-07-11
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 
 
-[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/roots)](https://cran.r-project.org/package=roots) [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
 Reconstructing ordered ontogenic trajectories provides methods for:
 
@@ -19,6 +19,16 @@ The main goal of *roots* is to infer plausible developmental journeys guided by 
 
 Installation
 ------------
+
+Can be installed through CRAN or GitHub
+
+### CRAN
+
+``` {.r}
+install.packages("roots")
+```
+
+### Bleeding edge
 
 ``` {.r}
 library(devtools)

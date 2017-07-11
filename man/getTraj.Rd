@@ -38,6 +38,11 @@ Return a plausible developmental journey
 \details{
 Return a plausible developmental journey
 }
+\examples{
+\dontrun{
+traj <- getTraj(rdmap, tm, startCells, terminalCells)
+}
+}
 \author{
 Wajid Jawaid
 }
