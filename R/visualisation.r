@@ -9,6 +9,8 @@
 ##' @param mkv Optional. Give your own markov matrix.
 ##' @param plotDims Default 2. Number of dimensions to plot
 ##' @param kernSq Factor to tighten kernel - operates on sigmas.
+##' @param seed Set seed to aid reproducibility
+##' @param drl_options Options passed to layout_with_drl()
 ##' @param ... Additonal parameters not currently in use
 ##' @return A list of l, dimensionality reduced data.frame;
 ##' clust, returned from louvainClust();
@@ -23,16 +25,16 @@
 ##' }
 ##' @author Wajid Jawaid
 ##' @importFrom igraph layout_with_fr layout_with_drl
-##' @importFrom stats dist prcomp
+##' @importFrom stats dist prcomp runif
 ##' @export
 goggles <- function(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL, plotDims = 2,
-                    kernSq = 2, ...) {
+                    kernSq = 2, seed = 0, drl_options = NULL, ...) {
     if (!is.matrix(x)) {
         stop("x must be a matrix.")
     }
     
     if (is.null(dmat)) {
-        cat("Preprocessind matrix ...")
+        cat("Preprocessing matrix ...")
         xx <- bgGeneNorm(x)
         xx <- filterGenes(xx, fano = FALSE)
         xx <- scale(xx)
@@ -79,15 +81,19 @@ goggles <- function(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL, plotDims
     ## Some states have no exit
     allowableStates <- rowSums(nadj) != 0
     sum(allowableStates)
-    nadj <- nadj[allowableStates, allowableStates]
+    nadja <- nadj[allowableStates, allowableStates]
     cat("done.\nClustering ... ")
     
-    lvnClust <- findLouvain(nadj)
+    lvnClust <- findLouvain(nadja)
     cat("done.\nGenerating graph layout ... ")
-    l <- layout_with_drl(lvnClust$gph, dim=plotDims)
+    set.seed(seed)
+    seedmat <- matrix(runif(plotDims * nrow(nadja)), ncol = plotDims)
+    l <- layout_with_drl(lvnClust$gph, dim=plotDims, use.seed = 0, seed = seedmat,
+                         options = drl_options)
     rownames(l) <- rownames(x)[allowableStates]
     colnames(l) <- paste0("drl_", 1:ncol(l))
     cat("done.\n")
     return(list(l = l, clust = lvnClust, adj = adj, dmat = dmat,
-                pca = xpc, sparse = c(lmp, hmp)))
+                pca = xpc, sparse = c(lmp, hmp), nadj = nadj,
+                nadja = nadja, seed = seed))
 }

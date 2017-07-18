@@ -5,7 +5,7 @@
 \title{View single cell dataset}
 \usage{
 goggles(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL,
-  plotDims = 2, kernSq = 2, ...)
+  plotDims = 2, kernSq = 2, seed = 0, drl_options = NULL, ...)
 }
 \arguments{
 \item{x}{Matrix with cells in rows and gene in columns}
@@ -21,6 +21,10 @@ goggles(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL,
 \item{plotDims}{Default 2. Number of dimensions to plot}
 
 \item{kernSq}{Factor to tighten kernel - operates on sigmas.}
+
+\item{seed}{Set seed to aid reproducibility}
+
+\item{drl_options}{Options passed to layout_with_drl()}
 
 \item{...}{Additonal parameters not currently in use}
 }
