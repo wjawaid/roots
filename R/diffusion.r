@@ -235,6 +235,7 @@ calculateVariableSigmas <- function(d, knn) {
 ##' d <- applyGaussianKernelwithVariableSigma(dist, sigmas)
 ##' }
 ##' @author Wajid Jawaid
+##' @export
 applyGaussianKernelwithVariableSigma <- function(d2, rsigmas, csigmas = NULL) {
     if (is.null(csigmas)) {
         sigmaMat <- rsigmas %*% t(rsigmas)
