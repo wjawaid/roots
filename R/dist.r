@@ -31,6 +31,7 @@ fastDist <- function(x, squared = FALSE) {
 ##' @param knn Number of nearest neighbours. See above.
 ##' @return Markovian sparse matrix.
 ##' @author Wajid Jawaid
+##' @export
 sparseMarkov <- function(mkv, knn) {
     predicateFilter <- mkv <= (1/knn)
     mkv[predicateFilter] <- 0
