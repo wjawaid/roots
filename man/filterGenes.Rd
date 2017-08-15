@@ -4,7 +4,7 @@
 \alias{filterGenes}
 \title{Filter genes}
 \usage{
-filterGenes(x, mu = 0.01, cv = 2, fano = FALSE)
+filterGenes(x, mu = 0.01, cv = 2, fano = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{x}{Matrix to be normalised with cells in rows and
@@ -15,6 +15,8 @@ genes in columns}
 \item{cv}{Coefficient of variation or Fano factor threshold.}
 
 \item{fano}{Default TRUE. Predicate treat CV as Fano factor or CV}
+
+\item{verbose}{Default FALSE. Return plot.}
 }
 \value{
 Returns a filtered matrix with same number of cells but fewer

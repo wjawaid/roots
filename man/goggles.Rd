@@ -5,7 +5,9 @@
 \title{View single cell dataset}
 \usage{
 goggles(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL,
-  plotDims = 2, kernSq = 2, seed = 0, drl_options = NULL, ...)
+  plotDims = 2, kernSq = 2, seed = 0, drl_options = NULL,
+  filter.mean = 0.01, filter.cv = 2, use_fano = FALSE, verbose = FALSE,
+  ...)
 }
 \arguments{
 \item{x}{Matrix with cells in rows and gene in columns}
@@ -25,6 +27,14 @@ goggles(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL,
 \item{seed}{Set seed to aid reproducibility}
 
 \item{drl_options}{Options passed to layout_with_drl()}
+
+\item{filter.mean}{Default 1e-02. Threshold for mean filter}
+
+\item{filter.cv}{Default 2. Threshold for CV/Fano filter}
+
+\item{use_fano}{Default FALSE. If TRUE use Fano factor not CV.}
+
+\item{verbose}{Default FALSE. Is TRUE will return more details}
 
 \item{...}{Additonal parameters not currently in use}
 }

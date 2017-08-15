@@ -33,6 +33,7 @@ bgGeneNorm <- function(x, threshold = 0.05) {
 ##' @param mu Meam threshold
 ##' @param cv Coefficient of variation or Fano factor threshold. 
 ##' @param fano Default TRUE. Predicate treat CV as Fano factor or CV
+##' @param verbose Default FALSE. Return plot.
 ##' @return Returns a filtered matrix with same number of cells but fewer
 ##' genes than 'x'
 ##' @examples
@@ -42,14 +43,19 @@ bgGeneNorm <- function(x, threshold = 0.05) {
 ##' @author Wajid Jawaid
 ##' @inheritParams bgGeneNorm
 ##' @importFrom stats sd var
-filterGenes <- function(x, mu = 0.01, cv = 2, fano = FALSE) {
+##' @importFrom grDevices dev.new
+filterGenes <- function(x, mu = 0.01, cv = 2, fano = FALSE, verbose = FALSE) {
     cmu <- colMeans(x)
     if (fano)
         ccv <- apply(x, 2, var) / cmu
     else
         ccv <- apply(x, 2, sd) / cmu
-    plot(cmu, ccv)
-    filteredGenes <- (cmu > mu) & (ccv > cv) 
-    points(cmu[filteredGenes], ccv[filteredGenes], col=2)
+    filteredGenes <- (cmu > mu) & (ccv > cv)
+    if (verbose) {
+        dev.new()
+        plot(cmu, ccv, log = "xy", main = ifelse(fano, "Fano factor", "CV"), xlab = "mean",
+             ylab = ifelse(fano, "Fano factor", "CV"))
+        points(cmu[filteredGenes], ccv[filteredGenes], col=2)
+    }
     x <- x[,filteredGenes]
 }

@@ -11,6 +11,10 @@
 ##' @param kernSq Factor to tighten kernel - operates on sigmas.
 ##' @param seed Set seed to aid reproducibility
 ##' @param drl_options Options passed to layout_with_drl()
+##' @param filter.mean Default 1e-02. Threshold for mean filter
+##' @param filter.cv Default 2. Threshold for CV/Fano filter
+##' @param use_fano Default FALSE. If TRUE use Fano factor not CV.
+##' @param verbose Default FALSE. Is TRUE will return more details
 ##' @param ... Additonal parameters not currently in use
 ##' @return A list of l, dimensionality reduced data.frame;
 ##' clust, returned from louvainClust();
@@ -28,7 +32,8 @@
 ##' @importFrom stats dist prcomp runif
 ##' @export
 goggles <- function(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL, plotDims = 2,
-                    kernSq = 2, seed = 0, drl_options = NULL, ...) {
+                    kernSq = 2, seed = 0, drl_options = NULL, filter.mean = 0.01,
+                    filter.cv = 2, use_fano = FALSE, verbose = FALSE, ...) {
     if (!is.matrix(x)) {
         stop("x must be a matrix.")
     }
@@ -36,7 +41,7 @@ goggles <- function(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL, plotDims
     if (is.null(dmat)) {
         cat("Preprocessing matrix ...")
         xx <- bgGeneNorm(x)
-        xx <- filterGenes(xx, fano = FALSE)
+        xx <- filterGenes(xx, fano = use_fano, mu = filter.mean, cv = filter.cv, verbose = verbose)
         xx <- scale(xx)
         cat("done.\nPerforming PCA ... ")
         xpc <- prcomp(xx, center = FALSE, scale. = FALSE)$x[,1:pcaDims]
@@ -95,5 +100,5 @@ goggles <- function(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL, plotDims
     cat("done.\n")
     return(list(l = l, clust = lvnClust, adj = adj, dmat = dmat,
                 pca = xpc, sparse = c(lmp, hmp), nadj = nadj,
-                nadja = nadja, seed = seed))
+                nadja = nadja, seed = seed, genesUsed = colnames(xx)))
 }
