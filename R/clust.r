@@ -21,7 +21,6 @@ findLouvain <- function(mkv) {
                                                     class=as.character(x)))
     lvnClust <- do.call(rbind, lvnClust)
     rownames(lvnClust) <- lvnClust$cell
-    lvnClust
     lvnClust[,1] <- NULL                # Remove duplicate name column
     lvnClust <- lvnClust[rownames(mkv),,drop=FALSE]
     return(list(gph=gph, clust=lvnClust, cll = cll))

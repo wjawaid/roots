@@ -252,4 +252,6 @@ applyGaussianKernelwithVariableSigma <- function(d2, rsigmas, csigmas = NULL) {
         sigmaSum <- matrix(sigmaSum, length(rsigmaSqd))
     }
     W <- sqrt(2*sigmaMat / sigmaSum) * exp(-d2 / sigmaSum)
+    rownames(W) <- colnames(W) <- rownames(d2)
+    W
 }
