@@ -101,6 +101,7 @@ goggles <- function(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL, plotDims
     } else if (is.null(mkv) && !pp.mkv) {
         adj <- oldOut$adj
         nadj <- oldOut$nadj
+        nadja <- oldOut$nadja
         lmp <- oldOut$sparse[1]
         hmp <- oldOut$sparse[2]
         lvnClust <- oldOut$clust
@@ -142,7 +143,7 @@ goggles <- function(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL, plotDims
         cat("done.\nClustering ... ")
         lvnClust <- findLouvain(nadja)
         cat("done.\n")
-    } else allowableStates <- as.numeric(colnames(nadj))
+    } else allowableStates <- as.numeric(colnames(nadja))
 
     if (ois) sameSF <- sameSF && (pp$seed == seed)
     if (!sameSF && repeatDRL) {
