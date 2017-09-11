@@ -49,14 +49,20 @@ goggles <- function(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL, plotDims
     }
 
     sameSF <- FALSE
-    pp <- oldOut$params
-    pp.filter <- (pp$filter.mean != filter.mean ||
-                  pp$filter.cv != filter.cv ||
-                  pp$use_fano != use_fano)
-    pp.filter <- !is.na(pp.filter) && pp.filter
-    pp.pca <- pp$pcaDims != pcaDims
-    pp.pca <- !is.na(pp.pca) && pp.pca
-    if (is.na(oldOut$pca) && pp.pca) pp.pca <- FALSE
+    pp.filter <- TRUE
+    pp.pca <- TRUE
+    ois <- !is.null(oldOut)             # Old Iiteration supplied
+    
+    if (ois) {
+        pp <- oldOut$params
+        pp.filter <- (pp$filter.mean != filter.mean ||
+                      pp$filter.cv != filter.cv ||
+                      pp$use_fano != use_fano)
+        pp.filter <- !is.na(pp.filter) && pp.filter
+        pp.pca <- pp$pcaDims != pcaDims
+        pp.pca <- !is.na(pp.pca) && pp.pca
+        if (is.na(oldOut$pca) && pp.pca) pp.pca <- FALSE
+    }
     
     if (is.null(dmat) && (!pp.filter && !pp.pca)) {
         dmat <- oldOut$dmat
@@ -80,7 +86,9 @@ goggles <- function(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL, plotDims
         xpc <- NA
     }
 
-    pp.mkv <- !sameSF || (pp$kernSq != kernSq)
+    if (ois) {
+        pp.mkv <- !sameSF || (pp$kernSq != kernSq)
+    } else pp.mkv <- TRUE
     
     if (is.null(mkv) && pp.mkv) {
         cat("Calculating variable sigmas ... ")
@@ -135,7 +143,7 @@ goggles <- function(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL, plotDims
         lvnClust <- findLouvain(nadja)
     }
 
-    sameSF <- sameSF && (pp$seed == seed)
+    if (ois) sameSF <- sameSF && (pp$seed == seed)
     if (!sameSF && repeatDRL) {
         warning("Parameters have changed but previously calculated coordinates used as starting points. Was this intentional?")
     }
