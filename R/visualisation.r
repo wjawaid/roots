@@ -33,7 +33,7 @@
 ##' @author Wajid Jawaid
 ##' @importFrom igraph layout_with_fr layout_with_drl
 ##' @importFrom stats dist prcomp runif
-##' @importFrom rARPACK eigs
+##' @importFrom rARPACK svds
 ##' @export
 goggles <- function(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL, plotDims = 2,
                     kernSq = 2, seed = 0, drl_options = NULL, filter.mean = 0.01,
