@@ -142,7 +142,7 @@ goggles <- function(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL, plotDims
         cat("done.\nClustering ... ")
         lvnClust <- findLouvain(nadja)
         cat("done.\n")
-    } else allowableStates <- colnames(nadj)
+    } else allowableStates <- as.numeric(colnames(nadj))
 
     if (ois) sameSF <- sameSF && (pp$seed == seed)
     if (!sameSF && repeatDRL) {
