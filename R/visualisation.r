@@ -99,8 +99,8 @@ goggles <- function(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL, plotDims
         diag(adj) <- 0
         adj <- adj / rowSums(adj)
     } else if (is.null(mkv) && !pp.mkv) {
-        ajd <- oldOut$adj
-        najd <- oldOut$nadj
+        adj <- oldOut$adj
+        nadj <- oldOut$nadj
         lmp <- oldOut$sparse[1]
         hmp <- oldOut$sparse[2]
         lvnClust <- oldOut$clust
@@ -141,7 +141,8 @@ goggles <- function(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL, plotDims
         nadja <- nadj[allowableStates, allowableStates]
         cat("done.\nClustering ... ")
         lvnClust <- findLouvain(nadja)
-    }
+        cat("done.\n")
+    } else allowableStates <- colnames(allowableStates)
 
     if (ois) sameSF <- sameSF && (pp$seed == seed)
     if (!sameSF && repeatDRL) {
@@ -151,7 +152,7 @@ goggles <- function(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL, plotDims
     if (sameSF && !repeatDRL) {
         l <- oldOut$l
     } else {
-        cat("done.\nGenerating graph layout ... ")
+        cat("Generating graph layout ... ")
         set.seed(seed)
         if (repeatDRL) {
             seedmat <- oldOut$l
