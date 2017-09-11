@@ -7,7 +7,7 @@
 goggles(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL,
   plotDims = 2, kernSq = 2, seed = 0, drl_options = NULL,
   filter.mean = 0.01, filter.cv = 2, use_fano = FALSE, verbose = FALSE,
-  ...)
+  oldOut = NULL, repeatDRL = FALSE, ...)
 }
 \arguments{
 \item{x}{Matrix with cells in rows and gene in columns}
@@ -34,7 +34,12 @@ goggles(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL,
 
 \item{use_fano}{Default FALSE. If TRUE use Fano factor not CV.}
 
-\item{verbose}{Default FALSE. Is TRUE will return more details}
+\item{verbose}{Default FALSE. If TRUE will return more details}
+
+\item{oldOut}{Default NULL. Can return previous results for quicker analysis.}
+
+\item{repeatDRL}{Default FALSE. If you wish to redo the layout using previous
+iteration layout as starting point.}
 
 \item{...}{Additonal parameters not currently in use}
 }
