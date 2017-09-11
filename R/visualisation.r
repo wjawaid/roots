@@ -76,7 +76,7 @@ goggles <- function(x, pcaDims = 90, nsig = 5, dmat = NULL, mkv = NULL, plotDims
         xx <- filterGenes(xx, fano = use_fano, mu = filter.mean, cv = filter.cv, verbose = verbose)
         xx <- scale(xx)
         cat("done.\nPerforming PCA ... ")
-        xpc <- eigs(xx, which = "LR", k = pcaDims)$vectors
+        xpc <- svds(xx, k = pcaDims, nu = pcaDims, nv = 0)$u
         rm(xx); gc()
         cat("done.\nCalculating distance matrix ... ")
         dmat <- as.matrix(dist(xpc))
