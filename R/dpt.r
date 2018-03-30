@@ -10,6 +10,6 @@
 dpt <- function(dmap, startIndex) {
     vd <- t(t(dmap$vectors) - dmap$vectors[startIndex,])^2
     w <- dmap$values / (1 - dmap$values)
-    pt <- t(t(vd) * w)
-    rowSums(pt)
+    pt <- t(t(vd) * w^2)
+    sqrt(rowSums(pt))
 }
