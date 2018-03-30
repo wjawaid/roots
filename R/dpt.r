@@ -11,5 +11,5 @@ dpt <- function(dmap, startIndex) {
     vd <- (dmap$vectors - dmap$vectors[,startIndex])^2
     w <- dmap$values / (1 - dmap$values)
     pt <- t(t(vd) * w)
-    colSums(pt)
+    rowSums(pt)
 }
