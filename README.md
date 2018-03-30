@@ -1,12 +1,9 @@
 Reconstructing Ordered Ontogenic Trajectories
 ================
 Wajid Jawaid
-2017-09-11
+2018-03-30
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-
-
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/roots)](https://cran.r-project.org/package=roots) [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![CRAN mirror downloads](http://cranlogs.r-pkg.org/badges/roots)](https://cran.r-project.org/package=roots/)
 
 Reconstructing ordered ontogenic trajectories provides methods for:
@@ -24,13 +21,13 @@ Can be installed through CRAN or GitHub
 
 ### CRAN
 
-``` {.r}
+``` r
 install.packages("roots")
 ```
 
 ### Bleeding edge
 
-``` {.r}
+``` r
 library(devtools)
 install_github("wjawaid/roots")
 ```
@@ -40,7 +37,7 @@ Example
 
 Here I take the mouse adult haematopoietic data from [Nestorowa et al.](http://www.bloodjournal.org/content/early/2016/06/30/blood-2016-05-716480). Data is downloaded and processed using the **goggles()** function as below.
 
-``` {.r}
+``` r
 library(roots)
 
 ## Load data
